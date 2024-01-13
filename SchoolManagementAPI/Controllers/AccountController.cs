@@ -18,6 +18,17 @@ namespace SchoolManagementAPI.Controllers
             _logger = logger;
         }
 
+        [HttpGet("Login")]
+        public IActionResult GetAccount(string email, string password)
+        {
+            var account = _accountService.GetAccountByEmail(email, password);
+            if (account == null)
+            {
+                return NotFound("can not found account");
+            }
+            return Ok(account);
+        }
+
         [HttpGet(Name ="GetListAccount")]
         public IActionResult GetAccounts() 
         { 
